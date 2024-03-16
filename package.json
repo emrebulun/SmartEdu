@@ -1,0 +1,30 @@
+{
+  "name": "smartedu",
+  "version": "1.0.0",
+  "description": "Education Portal",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emrebulun/SmartEdu.git"
+  },
+  "keywords": [
+    "education",
+    "portal",
+    "node.js"
+  ],
+  "author": "Emre BULUN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emrebulun/SmartEdu/issues"
+  },
+  "homepage": "https://github.com/emrebulun/SmartEdu#readme",
+  "dependencies": {
+    "express": "^4.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
