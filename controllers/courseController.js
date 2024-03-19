@@ -60,3 +60,24 @@ exports.getCourse = async (req, res) => {
     });
   }
 };
+exports.loginUser = async (req, res) => {
+  try {
+    
+   const {email,password} = req.body ;
+   await User.findOne({email},(error,user) => {
+    if (user) {
+      bcrypt.compare(password,user.password,(error,same) => {
+        if (same) {
+          res.status(200).send("You are already logged in");
+        };
+      });
+    };
+  });
+
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      error,
+    });
+  }
+};
