@@ -1,9 +1,6 @@
 <%- include ('partials/_header'); %>
 <%- include ('partials/_navigations'); %>
 
-
-	
-	
 	<div class="all-title-box">
 		<div class="container text-center">
 			<h1>Courses<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
@@ -18,13 +15,10 @@
 								
 				<% for( let i = 0 ; i<courses.length; i++ ){ %>
 
-
-
-
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="course-item mb-5">
 						<div class="image-blog">
-							<img src="images/blog_1.jpg" alt="" class="img-fluid">
+							<img src="/images/blog_1.jpg" alt="" class="img-fluid">
 						</div>
 						<div class="course-br">
 							<div class="course-title">
@@ -58,19 +52,13 @@
 					<div class="widget-categories">
 						<h3 class="widget-title">Categories</h3>
 						<ul>
-							<li><a href="#">Political Science</a></li>
-							<li><a href="#">Business Leaders Guide</a></li>
-							<li><a href="#">Become a Product Manage</a></li>
-							<li><a href="#">Language Education</a></li>
-							<li><a href="#">Micro Biology</a></li>
-							<li><a href="#">Social Media Management</a></li>
+								<% for( let i = 0 ; i<categories.length; i++ ) { %>
+                        <li><a href="/courses?categories= <%= categories[i].slug %>"><%= categories[i].name %></a></li>
+			                <% } %>
 						</ul>
 					</div>
 				</div>
             </div><!-- end row -->
         </div><!-- end container -->
     </div><!-- end section -->
-
-
-	<%- include ('partials/_footer'); %>
-
+    <%- include ('partials/_footer'); %>
