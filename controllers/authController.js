@@ -1,52 +1,43 @@
-const User = require('../models/User');
+const User = require("../models/User");
 
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 exports.createUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
     res.status(201).json({
-      status: 'success',
+      status: "success",
       user,
     });
   } catch (error) {
     res.status(400).json({
-      status: 'fail',
+      status: "fail",
       error,
     });
   }
 };
 
-
 exports.loginUser = async (req, res) => {
+    const { email, password } = req.body; 
+
   try {
-    const { email, password } = req.body;
+    const user = await User.findOne({email});
 
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(404).json({
-        status: 'fail',
-        message: 'User not found',
-      });
+    if (user) {
+      const same = await bcrypt.compare(password, user.password);
+      if (same) {
+        req.session.userID = user._id; 
+        res.status(200).redirect('/');
+        // res.status(200).send("You are logged in");
+      } else {
+        res.status(401).send("Invalid password");
+      } } else {
+        res.status(404).send("User not found");
     }
-
-    const passwordMatch = bcrypt.compare(password, user.password);
-
-    if (!passwordMatch) {
-      return res.status(401).json({
-        status: 'fail',
-        message: 'Incorrect password',
-      });
-    }
-
-    // USER SESSION
-    res.status(200).send('YOU ARE LOGGED IN');
-    
   } catch (error) {
     res.status(500).json({
-      status: 'error',
-      message: error.message,
+      status: "error",
+      error,
     });
   }
 };
