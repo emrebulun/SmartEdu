@@ -1,6 +1,6 @@
 <%- include('partials/_header'); %>
 
-<%- include('partials/_navigation'); %>
+<%- include('partials/_navigations'); %>
 	
 	<div class="all-title-box">
 		<div class="container text-center">
@@ -56,7 +56,7 @@
 
 							<% for(let i=0; i< categories.length; i++ ) { %>
 
-							<li><a href="/courses?categories= <%= categories[i].slug %>"><%= categories[i].name %></a></li>
+							<li><a href="/courses?categories=<%= categories[i].slug %>"><%= categories[i].name %></a></li>
 							
 							<%	}  %>
 						</ul>
