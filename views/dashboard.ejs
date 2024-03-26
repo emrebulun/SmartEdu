@@ -9,7 +9,7 @@
 				<div class="all-title-box">
 					<div class="container text-center">
 						<h1>
-							<%= user.name %><span class="m_1">STUDENT</span>
+							<%= user.name %><span class="m_1"> <%= user.role %> </span>
 						</h1>
 					</div>
 				</div>
@@ -31,6 +31,7 @@
 						<div class="row mt-5">
 
 						<%	for(let i=0 ; i<user.courses.length; i++) { %>
+
 							<div class="col-lg-6 col-md-6 col-12">
 								<div class="course-item mb-5">
 									<div class="image-blog">
@@ -38,7 +39,7 @@
 									</div>
 									<div class="course-br">
 										<div class="course-title">
-											<h2><a href="#" title=""><%= user.courses[i].name %></a></h2>
+											<h2><a href="/courses/<%= user.courses[i].slug %>" title=""><%= user.courses[i].name %></a></h2>
 										</div>
 										<div class="course-desc">
 											<p><%= user.courses[i].description %> </p>
@@ -64,7 +65,7 @@
 						<div class="all-title-box">
 							<div class="container text-center">
 								<h1>
-									<%= user.name %><span class="m_1">TEACHER</span>
+									<%= user.name %><span class="m_1"><%= user.role %></span>
 								</h1>
 							</div>
 						</div>
