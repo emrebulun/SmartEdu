@@ -10,7 +10,7 @@ exports.createCourse = async (req, res) => {
       category: req.body.category,
       user: req.session.userID // hangi kursu hangi öğretmenin oluşturduğunu userID sayesinde belirlemiş oluyoruz
     });
-
+    req.flash('success',`${course.name} created`);
     res.status(201).redirect('/courses');
   } catch (error) {
     res.status(400).json({
