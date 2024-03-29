@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const {validationResult} = require(`express-validator`);
-const User = require('../models/User');
+const {validationResult} = require('express-validator')
+;const User = require('../models/User');
 const Category = require('../models/Category');
 const Course = require('../models/Course');
 
@@ -10,19 +10,19 @@ exports.createUser = async (req, res) => {
 
     res.status(201).redirect('/login');
   } catch (error) {
-   const errors = validationResult(req);
-   console.log(errors);
-   console.log(errors.array()[0].msg); 
-    
-   for (let i = 0; i < errors.array().length; i++) {
-    req.flash("error",`${errors.array()[i].msg}`);
-   }
-   
-   res.status(400).redirect('/register');
-  };
-  };
+     const errors = validationResult(req);
+     console.log(errors);
+     console.log(errors.array()[0].msg);
 
-  exports.loginUser = async (req, res) => {
+     for(let i=0; i< errors.array().length; i++ ){
+      req.flash('error' , `${errors.array()[i].msg}`);
+
+     }
+     res.status(400).redirect('/register');
+  }
+};
+
+exports.loginUser = async (req, res) => {
   
     const { email, password } = req.body; 
     //Assuming you're sending email and password in the request body 
@@ -53,11 +53,12 @@ exports.createUser = async (req, res) => {
   } 
 
 }
+  
 exports.logoutUser = (req, res) => {
   req.session.destroy(()=> {
     res.redirect('/');
   })
-}
+};
 
 
 exports.getDashboardPage = async (req, res) => {

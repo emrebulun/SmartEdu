@@ -12,17 +12,21 @@
         <div class="container">
             <div class="row"> 
                 <div class="col-lg-9 blog-post-single">
-					<% if (flashMessages) { %>
-						<% if (flashMessages.success) { %>
-						  <div class="alert alert-success">
-						<%= flashMessages.success %>
-						</div>
-					  <% } else if (flashMessages.error) { %>
-					   <div class="alert alert-danger">
-						<%= flashMessages.error %>
-						</div>
-						<% } %>
+					
+                    <% if(flashMessages) { %>
+
+						<% if(flashMessages.success) { %>
+							 <div class="alert alert-success">
+								 <%= flashMessages.success %>
+							 </div>
+					  
+					   <% } else if(flashMessages.error) { %>
+							 <div class="alert alert-danger">
+								 <%= flashMessages.error %>
+							 </div>
 					  <% } %>
+ 
+				   <% } %>
 				<div class="row"> 
 			<% for (let i=0; i< courses.length; i++) { %>
                 <div class="col-lg-6 col-md-6 col-12">
@@ -35,12 +39,16 @@
 								<h2><a href="/courses/<%= courses[i].slug %>" title=""><%= courses[i].name %></a></h2>
 							</div>
 							<div class="course-desc">
-								<p><%= courses[i].description.substring(0,100 ) + "..." %></p>
+								<p><%= courses[i].description.substring(0,100) + "..." %></p>
 							</div>
 						</div>
 						<div class="course-meta-bot">
 							<ul>
-								<li><i class="fa fa-user" aria-hidden="true"></i>Teacher Name</li>
+
+								<% if (courses[i].user && courses[i].user.name) { %>
+									<li><i class="fa fa-user" aria-hidden="true"></i><%= courses[i].user.name %></li>
+								<% } %>
+								
 							</ul>
 						</div>
 					</div>
@@ -55,10 +63,10 @@
 						<div class="site-search-area">
 							<form method="GET" id="site-searchform" action="/courses">
 								<div>
-								  <input class="input-text form-control" name="search" id="search-k" placeholder="Search..." type="text">
-								  <button id="searchsubmit" value="Search" type="submit"></button>
+									<input class="input-text form-control" name="search" id="search-k" placeholder="Search..." type="text">
+									<button id="searchsubmit" value="Search" type="submit"> </button>
 								</div>
-							  </form>
+							</form>
 						</div>
 					</div>
 					<div class="widget-categories">
@@ -66,8 +74,10 @@
 						<ul>
 
 							<% for (let i=0; i< categories.length; i++) { %>
+
 								<li><a href="/courses?categories=<%= categories[i].slug %>"><%= categories[i].name %></a></li>
-								<% } %>	
+								
+							<% } %>	
 						</ul>
 					</div>
 				</div>
