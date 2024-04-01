@@ -99,7 +99,7 @@ exports.enrollCourse = async (req,res) => {
   try{
 
     const user = await User.findById(req.session.userID);
-    await user.courses.addToSet({_id:req.body.course_id}); // push yerine addToSet kullanmamız sayesinde öğrenci aynı kursa kaydolamıyor ve push fonksiyonundaki mantık hatası ortadan kalkıyor yani courses array'e aynı kurs eklenemiyor 
+    await user.courses.push({_id:req.body.course_id}); // push yerine addToSet kullanmabilirdik bu sayede öğrenci aynı kursa kaydolamıyor ve push fonksiyonundaki mantık hatası ortadan kalkıyor yani courses array'e aynı kurs eklenemiyor. Ancak bu hata ileride çözüldüğü için push veya addToSet kullanabiliriz. 
     await user.save();
 
     res.redirect('/users/dashboard');
