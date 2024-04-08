@@ -1,6 +1,7 @@
 const Course = require('../models/Course');
 const Category = require('../models/Category');
 const User = require('../models/User');
+const { response } = require('express');
 
 exports.createCourse = async (req, res) => {
   try {
@@ -167,4 +168,6 @@ exports.updateCourse = async(req,res) => {
     })
   }
 
-}
+};
+
+

@@ -5,6 +5,7 @@ exports.createCategory = async(req,res) => {
     try {
         const category = await Category.create(req.body);
 
+        req.flash('success', "Category added successfully!");
         res.status(200).redirect('/users/dashboard');
 
     } catch(error) {
@@ -40,6 +41,7 @@ exports.updateCategory = async (req, res) => {
 
   category.save();
 
+  req.flash('success', "Category updated successfully");
   res.status(200).redirect('/users/dashboard');
 
   } catch (error) {

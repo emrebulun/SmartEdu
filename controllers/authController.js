@@ -36,9 +36,12 @@ exports.loginUser = async (req, res) => {
         if(isSame) {
           req.session.userID=user._id;
           res.status(200).redirect('/users/dashboard');
-        } else {
-        req.flash("error" , "Your password is not correct!");
-        res.status(400).redirect('/login');
+        } if(req.body.password === "") {
+          req.flash("error" , "Your password field must be filled !");
+          return res.status(400).redirect('/login');
+        } if(!isSame) {
+          req.flash('error' , "Your password is not correct!");
+          return res.status(400).redirect('/login');
         }
       }else {
         req.flash("error" , "User is not exist!");
