@@ -1,8 +1,7 @@
 const nodemailer = require('nodemailer');
+
 const Course = require('../models/Course');
-
 const User = require('../models/User');
-
 
 exports.getIndexPage = async (req, res) => {
 
@@ -45,7 +44,9 @@ exports.getContactPage = (req,res)=> {
 }
 
 exports.sendEmail = async (req,res) => {
-try {
+
+  try{
+
   const outputMessage = `
   
   <h1>Mail Details</h1>
@@ -64,14 +65,14 @@ try {
     secure: true, // true for 465, false for other ports
     auth: {
       user: 'noname1person@gmail.com', // gmail account
-      pass: 'gbgm sevm ynhg nnvo664545', // gmail pass
+      pass: 'gbgm sevm ynhg nnvo', // gmail pass
     },
   });
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"Smart Edu Contact Form" <noname1person@gmail.com>', // sender address
-    to: '<bulunemre@gmail.com>', // list of receivers
+    to: '<newbora01@gmail.com>', // list of receivers
     subject: 'Smart Edu Contact Form New Message', // Subject line
     html: outputMessage, // html body
   });
@@ -83,14 +84,13 @@ try {
   console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
-
-   req.flash('success',"Successfully sent")
+  req.flash("success" , "We have received your message successfully!");
 
   res.status(200).redirect('contact');
 
-} catch (err) {
-  req.flash('error',`Something went wrong`)
+}catch(error) {
+  req.flash("error" , `Something went wrong ${error}`);
   res.status(200).redirect('contact');
-
 }
-};
+  
+}
